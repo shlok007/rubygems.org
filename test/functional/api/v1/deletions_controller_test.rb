@@ -21,7 +21,7 @@ class Api::V1::DeletionsControllerTest < ActionController::TestCase
           @v1.gem_download.save
           delete :create, gem_name: @rubygem.to_param, version: @v1.number
         end
-        should respond_with :bad_request
+        should respond_with :unprocessable_entity
         should "not modify any versions" do
           assert_equal 1, @rubygem.versions.count
           assert_equal 1, @rubygem.versions.indexed.count
