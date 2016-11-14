@@ -1,5 +1,6 @@
 class Linkset < ActiveRecord::Base
   belongs_to :rubygem
+  validates :rubygem, presence: true, uniqueness: true
 
   LINKS = %w(home code docs wiki mail bugs).freeze
 
