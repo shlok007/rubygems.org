@@ -4,7 +4,7 @@ class Api::V1::AdvisoriesController < Api::BaseController
   before_action :authenticate_with_api_key, only: [:create]
   before_action :verify_authenticated_user, only: [:create]
   before_action :find_rubygem_by_name,      only: [:create]
-  before_action :validate_rubygem,  only: [:create]
+  before_action :validate_rubygem, only: [:create]
   before_action :find_version, only: [:create]
 
   def create

@@ -19,21 +19,19 @@ class Api::BaseController < ApplicationController
   end
 
   def find_version
-    begin
-      if params[:version_range].blank?
-        slug = if params[:platform].blank?
-                 params[:version]
-               else
-                 "#{params[:version]}-#{params[:platform]}"
-               end
-        @version = Version.find_from_slug!(@rubygem, slug)
-      else
-        find_versions_by_range
-      end
-    rescue ActiveRecord::RecordNotFound
-      render plain: "The version #{params[:version]} does not exist.",
-             status: :not_found
+    if params[:version_range].blank?
+      slug = if params[:platform].blank?
+               params[:version]
+             else
+               "#{params[:version]}-#{params[:platform]}"
+             end
+      @version = Version.find_from_slug!(@rubygem, slug)
+    else
+      find_versions_by_range
     end
+  rescue ActiveRecord::RecordNotFound
+    render plain: "The version #{params[:version]} does not exist.",
+           status: :not_found
   end
 
   def find_versions_by_range

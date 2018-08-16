@@ -1,9 +1,8 @@
 class Api::V1::AuditsController < Api::BaseController
   skip_before_action :verify_authenticity_token, only: [:check]
 
-  before_action :find_rubygem_by_name,      only: [:check]
+  before_action :find_rubygem_by_name, only: [:check]
   before_action :find_version, only: [:check]
-
 
   def check
     response = {}
